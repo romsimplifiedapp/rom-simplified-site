@@ -7,170 +7,177 @@
   <meta name="description" content="ROM Simplified. Rough numbers. Clear direction. Built by an estimator for estimators. Coming soon.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0a1020;
-      --ink:#f4f6fb;
-      --muted:#8d99b3;
-      --line:rgba(120,160,255,.08);
-      --accent:#ffb020;
-      --accent2:#3b82f6;
-      --card:rgba(255,255,255,.04);
-      --border:rgba(255,255,255,.09);
+      --bg:#0f2132;      /* app navy */
+      --bg2:#14283a;
+      --ink:#f3efe6;     /* warm off-white */
+      --muted:#93a1ae;
+      --amber:#f0b445;   /* app amber */
+      --steel:#7f97ab;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
     body{
       font-family:Inter,system-ui,sans-serif;
-      background:var(--bg);
+      background:radial-gradient(ellipse at 50% 0%,var(--bg2) 0%,var(--bg) 70%);
       color:var(--ink);
-      overflow-x:hidden;
       min-height:100vh;
       display:flex;flex-direction:column;
+      overflow-x:hidden;
     }
+    /* blueprint grid */
     body::before{
       content:"";position:fixed;inset:0;z-index:-2;
       background-image:
-        linear-gradient(var(--line) 1px,transparent 1px),
-        linear-gradient(90deg,var(--line) 1px,transparent 1px),
-        linear-gradient(rgba(120,160,255,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(120,160,255,.035) 1px,transparent 1px);
+        linear-gradient(rgba(243,239,230,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(243,239,230,.05) 1px,transparent 1px),
+        linear-gradient(rgba(243,239,230,.02) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(243,239,230,.02) 1px,transparent 1px);
       background-size:96px 96px,96px 96px,24px 24px,24px 24px;
       mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
       -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
     }
-    .glow{position:fixed;border-radius:50%;filter:blur(110px);z-index:-1;opacity:.45;animation:drift 18s ease-in-out infinite alternate}
-    .g1{width:520px;height:520px;background:var(--accent2);top:-160px;left:-120px}
-    .g2{width:420px;height:420px;background:var(--accent);bottom:-180px;right:-100px;opacity:.25;animation-delay:-6s}
-    @keyframes drift{to{transform:translate(60px,40px) scale(1.1)}}
+    .glow{position:fixed;width:560px;height:560px;border-radius:50%;filter:blur(130px);z-index:-1;
+      background:var(--amber);opacity:.14;top:-220px;left:50%;margin-left:-280px;
+      animation:drift 16s ease-in-out infinite alternate}
+    @keyframes drift{to{transform:translate(40px,30px) scale(1.12)}}
 
-    header{padding:28px 24px;display:flex;justify-content:center}
-    .logo{display:flex;align-items:center;gap:12px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:.3px}
-    .mark{width:40px;height:40px;border-radius:8px;overflow:hidden;background:var(--accent);display:grid;place-items:center}
-    .mark img{width:100%;height:100%;object-fit:cover}
-    .mark span{color:var(--bg);font-weight:700;font-size:1.2rem}
+    .hazard{flex-shrink:0;height:8px;background:repeating-linear-gradient(-45deg,var(--amber) 0 16px,var(--bg) 16px 32px)}
 
-    main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 16px 48px}
-    .wrap{max-width:860px;width:100%;text-align:center}
+    header{flex-shrink:0;padding:28px 24px;text-align:center;font-weight:800;font-size:1.05rem;letter-spacing:.5px}
+    header span{font-weight:400}
 
-    .badge{
-      display:inline-flex;align-items:center;gap:10px;
-      font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;
-      color:var(--accent);padding:8px 16px;border:1px solid rgba(255,176,32,.35);border-radius:999px;
-      background:rgba(255,176,32,.07);margin-bottom:28px;
-      opacity:0;animation:up .8s .1s forwards;
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(255,176,32,.7);animation:pulse 1.8s infinite}
-    @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(255,176,32,0)}100%{box-shadow:0 0 0 0 rgba(255,176,32,0)}}
+    main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 20px 33vh;text-align:center}
+    .wrap{max-width:760px}
 
-    h1{
-      font-family:"Space Grotesk",sans-serif;font-weight:700;
-      font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;letter-spacing:-2px;
-      opacity:0;animation:up .8s .25s forwards;
-    }
-    h1 .hl{
-      background:linear-gradient(90deg,var(--accent),#ffd27a 50%,var(--accent2));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .tag{
-      margin-top:18px;font-family:"JetBrains Mono",monospace;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);
-      opacity:0;animation:up .8s .35s forwards;
-    }
-    .sub{
-      margin:18px auto 0;max-width:600px;color:var(--muted);font-size:clamp(1rem,2.2vw,1.18rem);line-height:1.65;
-      opacity:0;animation:up .8s .45s forwards;
-    }
-
-    .features{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;
-      opacity:0;animation:up .8s .6s forwards;
-    }
-    .card{
-      text-align:left;padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--border);
-      backdrop-filter:blur(8px);transition:transform .25s,border-color .25s;
-    }
-    .card:hover{transform:translateY(-4px);border-color:rgba(255,176,32,.4)}
-    .icon{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:rgba(59,130,246,.14);margin-bottom:14px}
-    .icon svg{width:20px;height:20px;stroke:#8fb6ff}
-    .card h3{font-family:"Space Grotesk",sans-serif;font-size:1.02rem;margin-bottom:6px}
-    .card p{color:var(--muted);font-size:.9rem;line-height:1.5}
-
-    .stats{
-      display:flex;justify-content:center;gap:48px;margin-top:44px;flex-wrap:wrap;
-      font-family:"JetBrains Mono",monospace;
-      opacity:0;animation:up .8s .75s forwards;
-    }
-    .stat b{display:block;font-size:1.6rem;color:var(--ink);font-family:"Space Grotesk",sans-serif}
-    .stat span{font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
-
-    footer{padding:24px 16px;text-align:center;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)}
-
+    .fade{opacity:0;animation:up .8s ease forwards}
+    .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}.d5{animation-delay:.7s}
     @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
-    @media (max-width:720px){
-      .features{grid-template-columns:1fr}
-      .stats{gap:28px}
+    .badge{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;
+      font-family:"JetBrains Mono",monospace;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;
+      color:var(--amber);padding:8px 16px;border:1px solid rgba(240,180,69,.4);border-radius:999px;background:rgba(240,180,69,.08);
     }
-    @media (prefers-reduced-motion:reduce){
-      *{animation:none!important;opacity:1!important}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(240,180,69,.7);animation:pulse 1.8s infinite}
+    @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(240,180,69,0)}100%{box-shadow:0 0 0 0 rgba(240,180,69,0)}}
+
+    h1{font-weight:800;font-size:clamp(2.6rem,8vw,5.2rem);line-height:1;letter-spacing:-.04em}
+    h1 em{font-style:normal;color:var(--amber)}
+
+    .ruler{
+      margin:30px auto 0;max-width:380px;height:12px;
+      background:repeating-linear-gradient(90deg,rgba(240,180,69,.7) 0 1px,transparent 1px 12px);
+      border-top:1px solid rgba(240,180,69,.7);
+      mask-image:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);
     }
+    .tag{margin-top:16px;font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber)}
+    .sub{margin:18px auto 0;max-width:520px;color:var(--muted);font-size:1.08rem;line-height:1.6}
+
+    /* construction scene */
+    .site{position:fixed;left:0;right:0;bottom:0;aspect-ratio:1440/400;min-height:34vh;max-height:46vh;z-index:-1;pointer-events:none}
+    .site svg{width:100%;height:100%;display:block}
+    .trolley{animation:slide 14s ease-in-out infinite alternate}
+    @keyframes slide{to{transform:translateX(150px)}}
+    .hook{transform-box:view-box;transform-origin:910px 66px;animation:sway 4.5s ease-in-out infinite alternate}
+    @keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+    .beacon{animation:blink 1.4s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    footer{flex-shrink:0;position:relative;padding:20px 16px;text-align:center;color:var(--muted);font-size:.8rem;background:rgba(15,33,50,.9);border-top:1px solid rgba(240,180,69,.25)}
+
+    @media (max-width:480px){.tag{letter-spacing:1.2px;font-size:.7rem}}
+    @media (max-width:719px){.site{aspect-ratio:auto;height:34vh;max-height:none}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important}}
   </style>
 </head>
 <body>
-  <div class="glow g1"></div>
-  <div class="glow g2"></div>
+  <div class="glow"></div>
+  <div class="hazard"></div>
 
-  <header>
-    <div class="logo">
-      ROM Simplified
-    </div>
-  </header>
+  <!-- Original illustration, hand-drawn in SVG -->
+  <div class="site" aria-hidden="true">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" fill="none">
+      <defs>
+        <pattern id="lattice" width="16" height="16" patternUnits="userSpaceOnUse">
+          <path d="M0 16 L16 0 M0 0 L16 16" stroke="#7f97ab" stroke-width="1"/>
+        </pattern>
+        <pattern id="frame" width="56" height="34" patternUnits="userSpaceOnUse">
+          <path d="M0 0 H56 M0 0 V34" stroke="#7f97ab" stroke-width="1.5"/>
+        </pattern>
+        <pattern id="scaffold" width="28" height="34" patternUnits="userSpaceOnUse">
+          <path d="M0 0 H28 M0 0 V34 M0 34 L28 0" stroke="#f0b445" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <g opacity=".55">
+        <!-- skyline -->
+        <g fill="#18324a">
+          <rect x="0" y="300" width="70" height="100"/>
+          <rect x="460" y="290" width="80" height="110"/>
+          <rect x="640" y="250" width="70" height="150"/>
+          <rect x="720" y="300" width="50" height="100"/>
+          <rect x="1300" y="280" width="80" height="120"/>
+          <rect x="1390" y="315" width="50" height="85"/>
+        </g>
+        <!-- steel frame -->
+        <rect x="90" y="196" width="280" height="204" fill="url(#frame)"/>
+        <path d="M90 196 H370 V400 M90 196 V400" stroke="#7f97ab" stroke-width="2"/>
+        <!-- scaffolding -->
+        <rect x="370" y="230" width="56" height="170" fill="url(#scaffold)" opacity=".7"/>
+        <!-- second frame -->
+        <rect x="820" y="240" width="224" height="160" fill="url(#frame)"/>
+        <path d="M820 240 H1044 V400 M820 240 V400" stroke="#7f97ab" stroke-width="2"/>
+        <!-- crane mast -->
+        <rect x="1100" y="60" width="20" height="340" fill="url(#lattice)"/>
+        <path d="M1100 60 V400 M1120 60 V400" stroke="#7f97ab" stroke-width="2"/>
+        <rect x="1094" y="62" width="32" height="22" rx="2" fill="#f0b445"/>
+        <path d="M1110 20 L1100 48 H1120 Z" stroke="#7f97ab" stroke-width="2"/>
+        <path d="M1110 20 L900 48 M1110 20 L1250 48" stroke="#7f97ab" stroke-width="1"/>
+        <!-- jib + counter jib -->
+        <rect x="880" y="48" width="220" height="12" fill="url(#lattice)"/>
+        <path d="M880 48 H1100 M880 60 H1100" stroke="#7f97ab" stroke-width="2"/>
+        <rect x="1120" y="48" width="140" height="12" fill="url(#lattice)"/>
+        <path d="M1120 48 H1260 M1120 60 H1260" stroke="#7f97ab" stroke-width="2"/>
+        <rect x="1220" y="60" width="36" height="26" fill="#2a425a"/>
+        <!-- trolley, hook, beam -->
+        <g class="trolley">
+          <rect x="900" y="58" width="20" height="8" fill="#f0b445"/>
+          <g class="hook">
+            <path d="M910 66 V180" stroke="#f3efe6" stroke-width="1.5"/>
+            <path d="M910 180 l-22 20 M910 180 l22 20" stroke="#f3efe6" stroke-width="1"/>
+            <rect x="868" y="200" width="84" height="10" fill="#f0b445"/>
+          </g>
+        </g>
+        <!-- ground -->
+        <rect x="0" y="396" width="1440" height="4" fill="#f0b445"/>
+      </g>
+      <circle class="beacon" cx="1110" cy="16" r="4" fill="#ff5a3c" opacity=".9"/>
+    </svg>
+  </div>
+
+  <header>ROM <span>Simplified</span></header>
 
   <main>
     <div class="wrap">
-      <div class="badge"><span class="dot"></span>Coming Soon</div>
-
-      <h1>Rough numbers.<br><span class="hl">Clear direction.</span></h1>
-
-      <p class="tag">Built by an Estimator for Estimators</p>
-
-      <p class="sub">Fast rough order of magnitude (ROM) estimates by building type and CSI / Uniformat category, with PDF and Excel reports.</p>
-
-      <div class="features">
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
-          </div>
-          <h3>Open or create a project</h3>
-          <p>Start a new estimate or pick up where you left off.</p>
-        </div>
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          </div>
-          <h3>CSI or Uniformat</h3>
-          <p>Organize costs by the categories your team already uses.</p>
-        </div>
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
-          </div>
-          <h3>Export PDF / Excel</h3>
-          <p>Clean reports with preliminary-ROM disclosures, ready to share.</p>
-        </div>
-      </div>
-
-      <div class="stats">
-        <div class="stat"><b>691</b><span>Cost Types</span></div>
-        <div class="stat"><b>PDF · XLS · CSV</b><span>Exports</span></div>
-        <div class="stat"><b>Cloud</b><span>Backup</span></div>
-      </div>
+      <div class="badge fade d1"><span class="dot"></span>Coming Soon</div>
+      <h1 class="fade d2">Rough numbers.<br><em>Clear direction.</em></h1>
+      <div class="ruler fade d3"></div>
+      <p class="tag fade d3">Built by an Estimator for Estimators</p>
+      <p class="sub fade d4">Construction ROM estimates by CSI or Uniformat, with PDF and Excel reports.</p>
     </div>
   </main>
 
   <footer>© <span id="y"></span> ROM Simplified · Rough order. Clear direction.</footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById('y').textContent=new Date().getFullYear();
+    // on narrow screens, keep the crane in view
+    var sv=document.querySelector('.site svg');
+    function fit(){sv.setAttribute('preserveAspectRatio',innerWidth<720?'xMidYMax meet':'xMidYMax slice');sv.setAttribute('viewBox',innerWidth<720?'800 0 480 400':'0 0 1440 400');}
+    fit();addEventListener('resize',fit);
+  </script>
 </body>
 </html>
